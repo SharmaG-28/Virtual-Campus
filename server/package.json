@@ -1,7 +1,7 @@
 {
-  "name": "metaverse-campus-server",
+  "name": "virtual-campus-server",
   "version": "1.0.0",
-  "description": "Colyseus server for Metaverse Campus",
+  "description": "Colyseus server for Virtual Campus",
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",

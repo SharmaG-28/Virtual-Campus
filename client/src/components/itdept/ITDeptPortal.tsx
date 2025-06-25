@@ -2,7 +2,7 @@ import React from 'react'
 
 const ITDeptPortal = () => {
   return (
-    <div>ITDeptPortal</div>
+    <div>Portal Under Development</div>
   )
 }
 

@@ -1,6 +1,6 @@
 // client/src/App.tsx
 import { useEffect, useState, useCallback, useRef } from 'react';
-// import './App.css';
+// import './App.css'; // Uncomment if you have global CSS here
 import Modal from './components/Modal';
 import LoginPage from './components/login/LoginPage';
 import AvatarSelector from './components/login/AvatarSelector';
@@ -22,6 +22,9 @@ import AcademicPortal from './components/academic/AcademicPortal';
 import FinancePortal from './components/finance/FinancePortal';
 import CompDeptPortal from './components/compdept/CompDeptPortal';
 import ITDeptPortal from './components/itdept/ITDeptPortal';
+
+// Import the VideoCall component
+import VideoCall from './components/communication/VideoCall';
 
 // Define the stages of the application flow
 type AppStage = 'login' | 'avatar_selection' | 'camera_setup' | 'lobby' | 'game';
@@ -48,6 +51,7 @@ function App() {
     const [activeModal, setActiveModal] = useState<string | null>(null);
     const [modalTitle, setModalTitle] = useState<string>('');
     const [isLoadingGame, setIsLoadingGame] = useState(false); // New state for explicit game loading
+    const [showMiniVideo, setShowMiniVideo] = useState(false); // State to control visibility of mini video feed
 
     // Refs for Phaser game management
     const phaserContainerRef = useRef<HTMLDivElement>(null);
@@ -85,6 +89,12 @@ function App() {
     // Log stage changes for debugging
     useEffect(() => {
         console.log(`[App.tsx] Current stage changed to: ${currentStage}`);
+        // Control mini video visibility based on game stage
+        if (currentStage === 'game') {
+            setShowMiniVideo(true);
+        } else {
+            setShowMiniVideo(false);
+        }
     }, [currentStage]);
 
     // Effect to manage Phaser game instance lifecycle
@@ -203,10 +213,13 @@ function App() {
 
             {/* Render modals on top of the game or other stages */}
             {activeModal && (
-                <Modal title={modalTitle} onClose={() => setActiveModal(null)}>
+                <Modal onClose={() => setActiveModal(null)}>
                     {renderModalContent()}
                 </Modal>
             )}
+
+            {/* Render the mini video call component */}
+            {showMiniVideo && <VideoCall onClose={() => setShowMiniVideo(false)} />}
         </div>
     );
 }

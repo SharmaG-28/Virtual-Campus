@@ -2,7 +2,7 @@ import React from 'react'
 
 const CompDeptPortal = () => {
   return (
-    <div>CompDeptPortal</div>
+    <div>Portal Under Development</div>
   )
 }
 
